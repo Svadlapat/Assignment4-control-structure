@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Schedule</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Weekly Shift Schedule</h1>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Morning</th>
+            <th>Afternoon</th>
+            <th>Evening</th>
+        </tr>
+        {% for day, shifts in schedule.items() %}
+        <tr>
+            <td>{{ day }}</td>
+            <td>{{ ", ".join(shifts["morning"]) }}</td>
+            <td>{{ ", ".join(shifts["afternoon"]) }}</td>
+            <td>{{ ", ".join(shifts["evening"]) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
