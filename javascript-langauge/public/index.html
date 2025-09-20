@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Schedule</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        h1 { text-align: center; }
+        button { padding: 10px 20px; margin-bottom: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Weekly Employee Schedule</h1>
+    <button onclick="loadSchedule()">Generate Schedule</button>
+    <div id="table-container"></div>
+
+    <script>
+        async function loadSchedule() {
+            const res = await fetch('/schedule');
+            const schedule = await res.json();
+
+            let html = '<table><tr><th>Day</th><th>Morning</th><th>Afternoon</th><th>Evening</th></tr>';
+            for (let day in schedule) {
+                html += `<tr>
+                    <td>${day}</td>
+                    <td>${schedule[day].morning.join(', ')}</td>
+                    <td>${schedule[day].afternoon.join(', ')}</td>
+                    <td>${schedule[day].evening.join(', ')}</td>
+                </tr>`;
+            }
+            html += '</table>';
+            document.getElementById('table-container').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
